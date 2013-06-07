@@ -18,7 +18,7 @@ HRESULT Game::Initialize()
 	DBOUT("dpiX is " << dpiX << ", dpiY is " << dpiY << "\n" );
 	DBOUT("width is " << width << ", height is " << height << "\n" );
 
-	SetWindowPos(hWnd, HWND_TOPMOST, CW_USEDEFAULT, CW_USEDEFAULT, width, height, WS_EX_TOPMOST | WS_POPUP );
+	SetWindowPos(hWnd, HWND_TOP, CW_USEDEFAULT, CW_USEDEFAULT, width, height, SWP_NOMOVE );
 	
 	return hr; 
 }
@@ -42,24 +42,6 @@ HRESULT Game::CreateDeviceResources()
             D2D1::HwndRenderTargetProperties(hWnd, size),
             &renderTarget
             );
-
-
-        //if (SUCCEEDED(hr))
-        //{
-        //    // Create a gray brush.
-        //    hr = renderTarget->CreateSolidColorBrush(
-        //        D2D1::ColorF(D2D1::ColorF::LightSlateGray),
-        //        &m_pLightSlateGrayBrush
-        //        );
-        //}
-        //if (SUCCEEDED(hr))
-        //{
-            // Create a blue brush.
-        //    hr = m_pRenderTarget->CreateSolidColorBrush(
-        //        D2D1::ColorF(D2D1::ColorF::CornflowerBlue),
-        //        &m_pCornflowerBlueBrush
-        //        );
-        //}
     }
 
     return hr;
@@ -73,7 +55,9 @@ void Game::OnResize(UINT width, UINT height)
 
 HRESULT Game::Update()
 {
+	DBOUT("Update occured");
 	HRESULT hr = S_OK;
+	hr = Render();
 	return hr;
 }
 
@@ -86,6 +70,8 @@ HRESULT Game::Render()
 	if(SUCCEEDED(hr))
 	{
 		renderTarget->BeginDraw();
+		renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+		renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
 		hr = renderTarget->EndDraw();
 	}
 

@@ -21,15 +21,11 @@ HRESULT SnakeD2D::Initialize()
 	// Create the window.
 	hWnd = CreateWindow(
 		windowsClassName,
-		L"Application",
-		//WS_OVERLAPPEDWINDOW,
+		L"SnakeD2D",
 		WS_EX_TOPMOST | WS_POPUP,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
 		0, 0,
-		// static_cast<UINT>(ceil(currentResolutionWidth * dpiX / 96.f)),
-		// static_cast<UINT>(ceil(currentResolutionHeight * dpiY / 96.f)),
-		// 640, 480,
 		nullptr,
 		nullptr,
 		HINST_THISCOMPONENT,
@@ -40,12 +36,13 @@ HRESULT SnakeD2D::Initialize()
     
 	if (SUCCEEDED(hr))
 	{
+		game = new Game(hWnd);
+		hr = game->Initialize();
 		ShowWindow(hWnd, SW_SHOWNORMAL);
 		UpdateWindow(hWnd);
 	}
 
-	game = new Game(hWnd);
-	hr = game->Initialize();
+
 
 
 	return hr;
@@ -91,8 +88,9 @@ LRESULT CALLBACK SnakeD2D::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARA
 		default:
 			break;
 		case WM_PAINT:
-			// I Think we can ignore this?
+			ValidateRect(hwnd, nullptr); // avoid new wm_paint messages
 			wasHandled = true;
+			result = 0;
 			break;
 		case WM_SIZE:
 			{
@@ -123,14 +121,19 @@ void SnakeD2D::Run()
 {
 	MSG msg;
 
-	PeekMessage(&msg, nullptr, 0, 0, PM_NOREMOVE);
-
-	while( msg.message != WM_QUIT) 
+	bool running = true;
+	
+	while(running) 
 	{
 		if(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			if(msg.message == WM_QUIT)
+				running = false;
+			else
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
 		}
 		else
 		{
