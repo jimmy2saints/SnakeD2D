@@ -8,6 +8,8 @@
 
 #include "safe_release.h"
 #include "debugging.h"
+#include "GameState.h"
+#include "StartMenuState.h"
 
 class Game
 {
@@ -22,10 +24,6 @@ public:
 private:
 	HWND hWnd;
 	ID2D1Factory* direct2dFactory;
-	ID2D1HwndRenderTarget* renderTarget;
-
-	HRESULT CreateDeviceResources();
-	void DiscardDeviceResources();
-	HRESULT Render();
+	GameState* state;
 };
 

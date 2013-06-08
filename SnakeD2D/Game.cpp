@@ -20,81 +20,26 @@ HRESULT Game::Initialize()
 
 	SetWindowPos(hWnd, HWND_TOP, CW_USEDEFAULT, CW_USEDEFAULT, width, height, SWP_NOMOVE );
 	
+	state = new StartMenuState(hWnd, direct2dFactory);
 	return hr; 
-}
-
-HRESULT Game::CreateDeviceResources()
-{
-    HRESULT hr = S_OK;
-
-    if (!renderTarget)
-    {
-        RECT rc;
-        GetClientRect(hWnd, &rc);
-
-        D2D1_SIZE_U size = D2D1::SizeU(
-            rc.right - rc.left,
-            rc.bottom - rc.top
-            );
-
-        hr = direct2dFactory->CreateHwndRenderTarget(
-            D2D1::RenderTargetProperties(),
-            D2D1::HwndRenderTargetProperties(hWnd, size),
-            &renderTarget
-            );
-    }
-
-    return hr;
 }
 
 void Game::OnResize(UINT width, UINT height)
 {
-    if (renderTarget)
-		renderTarget->Resize(D2D1::SizeU(width, height));
+	state->OnResize(width, height);
 }
 
 HRESULT Game::Update()
 {
-	DBOUT("Update occured");
 	HRESULT hr = S_OK;
-	hr = Render();
+	hr = state->Update();
 	return hr;
-}
-
-HRESULT Game::Render()
-{
-	HRESULT hr = S_OK;
-
-	hr = CreateDeviceResources();
-
-	if(SUCCEEDED(hr))
-	{
-		renderTarget->BeginDraw();
-		renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-		renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
-		hr = renderTarget->EndDraw();
-	}
-
-	if (hr == D2DERR_RECREATE_TARGET)
-    {
-        hr = S_OK;
-        DiscardDeviceResources();
-    }
-
-	return hr;
-}
-
-
-void Game::DiscardDeviceResources()
-{
-	SafeRelease(&direct2dFactory);
-	SafeRelease(&renderTarget);
 }
 
 Game::Game(HWND windowsHandle) : 
 	hWnd(windowsHandle),
-	direct2dFactory(nullptr), 
-	renderTarget(nullptr)
+	state(nullptr),
+	direct2dFactory(nullptr)
 {
 }
 
@@ -102,5 +47,7 @@ Game::Game(HWND windowsHandle) :
 Game::~Game(void)
 {
 	SafeRelease(&direct2dFactory);
-	SafeRelease(&renderTarget);
+
+	if(state)
+		delete state;
 }

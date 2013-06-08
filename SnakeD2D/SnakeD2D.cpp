@@ -18,7 +18,6 @@ HRESULT SnakeD2D::Initialize()
 
 	RegisterClassEx(&wcex);
 
-	// Create the window.
 	hWnd = CreateWindow(
 		windowsClassName,
 		L"SnakeD2D",
@@ -50,7 +49,6 @@ HRESULT SnakeD2D::Initialize()
 
 LRESULT CALLBACK SnakeD2D::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// OutputDebugStringW(L"Application WndProc\n");
     LRESULT result = 0;
 	bool wasHandled = false;
 

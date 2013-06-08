@@ -65,12 +65,16 @@
   <ItemGroup>
     <ClInclude Include="debugging.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="safe_release.h" />
     <ClInclude Include="SnakeD2D.h" />
+    <ClInclude Include="StartMenuState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="SnakeD2D.cpp" />
+    <ClCompile Include="StartMenuState.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
