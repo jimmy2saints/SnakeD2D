@@ -25,6 +25,6 @@ private:
 	HRESULT Render();
 	HRESULT CreateDeviceResources();
 	void DiscardDeviceResources();
-	
+
 };
 

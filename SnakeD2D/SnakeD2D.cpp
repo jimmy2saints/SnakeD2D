@@ -108,6 +108,7 @@ LRESULT CALLBACK SnakeD2D::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARA
 	return result;
 }
 
+
 void SnakeD2D::OnResize(UINT width, UINT height)
 {
 	if(game)
