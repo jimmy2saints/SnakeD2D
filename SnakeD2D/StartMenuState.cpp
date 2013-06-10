@@ -55,6 +55,7 @@ void StartMenuState::OnUpdate()
 
 void StartMenuState::HandleInput()
 {
+	// TODO: possible refactor: move meat and bones of input capture to GameState class?
 	int currentKeyboardState = 0;
 	if(GetAsyncKeyState( VK_DOWN)) currentKeyboardState |= UP_ARROW;
 	if(GetAsyncKeyState(VK_UP)) currentKeyboardState |= DOWN_ARROW;

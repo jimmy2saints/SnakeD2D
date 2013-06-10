@@ -17,6 +17,7 @@ GameState::~GameState(void)
 
 HRESULT GameState::Update()
 {
+	// TODO: Lock to execute OnUpdate() to specific time based update interval?
 	OnUpdate();
 	HRESULT hr = Render();
 	return hr;
