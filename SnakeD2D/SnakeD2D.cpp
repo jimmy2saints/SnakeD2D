@@ -41,9 +41,6 @@ HRESULT SnakeD2D::Initialize()
 		UpdateWindow(hWnd);
 	}
 
-
-
-
 	return hr;
 }
 

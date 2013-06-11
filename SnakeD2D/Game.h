@@ -32,6 +32,13 @@ private:
 	GAME_STATE gameState;
 	GAME_STATE oldGameState;
 
+	int fpsCounter;
+	int ticksCounter;
+	int ticksSinceLastFrame;
+	int ticksLastFrame;
+	int fps;
+
 	void UpdateGameState();
+	void UpdateFps();
 };
 

@@ -73,7 +73,7 @@ HRESULT GameState::CreateDeviceResources()
 
         hr = direct2dFactory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
-            D2D1::HwndRenderTargetProperties(hWnd, size),
+            D2D1::HwndRenderTargetProperties(hWnd, size, D2D1_PRESENT_OPTIONS_IMMEDIATELY), // D2D1_PRESENT_OPTIONS_NONE
             &renderTarget
             );
 

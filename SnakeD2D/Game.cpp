@@ -31,6 +31,8 @@ void Game::OnResize(UINT width, UINT height)
 
 HRESULT Game::Update()
 {
+	UpdateFps();
+
 	HRESULT hr = S_OK;
 	UpdateGameState();
 
@@ -38,6 +40,22 @@ HRESULT Game::Update()
 		hr = state->Update();
 	
 	return hr;
+}
+
+void Game::UpdateFps()
+{
+	fpsCounter++;
+	int ticks = GetTickCount();
+	ticksSinceLastFrame = ticks - ticksLastFrame;
+	ticksCounter += ticksSinceLastFrame;
+	ticksLastFrame = ticks;
+	if(ticksCounter >= 1000)
+	{
+		fps = fpsCounter;
+		fpsCounter = 0;
+		ticksCounter = 0;
+		DBOUT("Current FPS: " << fps << "\n");
+	}
 }
 
 void Game::UpdateGameState()
@@ -77,6 +95,11 @@ Game::Game(HWND windowsHandle) :
 {
 	oldGameState = GAME_STATE::BOOTING;
 	gameState = GAME_STATE::BOOTING;
+	fpsCounter = 0;
+	ticksCounter = 0;
+	fps = 0;
+	ticksLastFrame = 0;
+	ticksSinceLastFrame = 0;
 }
 
 
