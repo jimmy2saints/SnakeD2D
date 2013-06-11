@@ -1,5 +1,5 @@
 #pragma once
-#include "gamestate.h"
+#include "GameState.h"
 #include <dwrite.h>
 
 #ifndef TEXT_SIZE
@@ -14,7 +14,7 @@ public:
 	void OnUpdate();
 	void OnDiscardDeviceResources();
 	HRESULT OnCreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
-	StartMenuState(HWND windowHandle, ID2D1Factory* factory);
+	StartMenuState(HWND windowHandle, ID2D1Factory* factory, Game* gamePtr);
 	~StartMenuState(void);
 
 private:

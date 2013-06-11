@@ -1,5 +1,6 @@
 #include "StartMenuState.h"
-
+#include "safe_release.h"
+#include "game_state.h"
 
 HRESULT StartMenuState::OnRender(ID2D1HwndRenderTarget* renderTarget)
 {
@@ -78,6 +79,7 @@ void StartMenuState::HandleInput()
 	{
 		if(currentMenuOption == START)
 		{
+			ChangeGameState(GAME_STATE::PLAYING);
 		}
 		else
 		{
@@ -108,8 +110,8 @@ void StartMenuState::OnDiscardDeviceResources()
 }
 
 
-StartMenuState::StartMenuState(HWND windowHandle, ID2D1Factory* factory) :
-	GameState(windowHandle, factory), 
+StartMenuState::StartMenuState(HWND windowHandle, ID2D1Factory* factory, Game* gamePtr) :
+	GameState(windowHandle, factory, gamePtr), 
 	writeFactory(nullptr),
 	textFormat(nullptr),
 	idleTextBrush(nullptr),

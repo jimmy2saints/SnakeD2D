@@ -20,7 +20,7 @@ HRESULT Game::Initialize()
 
 	SetWindowPos(hWnd, HWND_TOP, CW_USEDEFAULT, CW_USEDEFAULT, width, height, SWP_NOMOVE );
 	
-	state = new StartMenuState(hWnd, direct2dFactory);
+	ChangeGameState(GAME_STATE::START_MENU);
 	return hr; 
 }
 
@@ -32,8 +32,42 @@ void Game::OnResize(UINT width, UINT height)
 HRESULT Game::Update()
 {
 	HRESULT hr = S_OK;
-	hr = state->Update();
+	UpdateGameState();
+
+	if(state != nullptr)
+		hr = state->Update();
+	
 	return hr;
+}
+
+void Game::UpdateGameState()
+{
+	if( oldGameState == gameState)
+		return;
+
+	if(state != nullptr)
+	{
+		delete state;
+		state = nullptr;
+	}
+
+	switch(gameState)
+	{
+	case GAME_STATE::START_MENU:
+		state = new StartMenuState(hWnd, direct2dFactory, this);
+		break;
+	case GAME_STATE::PLAYING:
+		state = new PlayingGameState(hWnd, direct2dFactory, this);
+		break;
+	}
+
+	oldGameState = gameState;
+}
+
+void Game::ChangeGameState(GAME_STATE new_state)
+{
+	oldGameState = gameState;
+	gameState = new_state;
 }
 
 Game::Game(HWND windowsHandle) : 
@@ -41,6 +75,8 @@ Game::Game(HWND windowsHandle) :
 	state(nullptr),
 	direct2dFactory(nullptr)
 {
+	oldGameState = GAME_STATE::BOOTING;
+	gameState = GAME_STATE::BOOTING;
 }
 
 

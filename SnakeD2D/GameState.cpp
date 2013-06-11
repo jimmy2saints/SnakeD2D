@@ -1,18 +1,19 @@
 #include "GameState.h"
+#include "Game.h"
+#include "safe_release.h"
 
-
-
-GameState::GameState(HWND windowHandle, ID2D1Factory* factory)
+GameState::GameState(HWND windowHandle, ID2D1Factory* factory, Game* gamePtr)
 {
 	direct2dFactory = factory;
 	hWnd = windowHandle;
+	game = gamePtr;
 	renderTarget = nullptr;
 }
 
 
 GameState::~GameState(void)
 {
-	DiscardDeviceResources();
+	SafeRelease(&renderTarget);
 }
 
 HRESULT GameState::Update()
@@ -21,6 +22,11 @@ HRESULT GameState::Update()
 	OnUpdate();
 	HRESULT hr = Render();
 	return hr;
+}
+
+void GameState::ChangeGameState(GAME_STATE new_state)
+{
+	game->ChangeGameState(new_state);
 }
 
 void GameState::OnResize(UINT width, UINT height)

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\GameState">
+      <UniqueIdentifier>{25f0b3e4-fe8d-401a-b229-a0b6b5157358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameState">
+      <UniqueIdentifier>{e1583722-962e-402c-bdc9-a54615dfe06f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="safe_release.h">
@@ -28,10 +34,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameState</Filter>
     </ClInclude>
     <ClInclude Include="StartMenuState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingGameState.h">
+      <Filter>Header Files\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="game_state.h">
+      <Filter>Header Files\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -45,10 +57,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameState</Filter>
     </ClCompile>
     <ClCompile Include="StartMenuState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingGameState.cpp">
+      <Filter>Source Files\GameState</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
