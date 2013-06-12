@@ -66,6 +66,7 @@
     <ClInclude Include="debugging.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="game_defs.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="PlayingGameState.h" />
     <ClInclude Include="safe_release.h" />
@@ -79,6 +80,9 @@
     <ClCompile Include="SnakeD2D.cpp" />
     <ClCompile Include="StartMenuState.cpp" />
     <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="levels\level1" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

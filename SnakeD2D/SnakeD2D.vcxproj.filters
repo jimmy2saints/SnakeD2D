@@ -45,6 +45,9 @@
     <ClInclude Include="game_state.h">
       <Filter>Header Files\GameState</Filter>
     </ClInclude>
+    <ClInclude Include="game_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -65,5 +68,8 @@
     <ClCompile Include="PlayingGameState.cpp">
       <Filter>Source Files\GameState</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="levels\level1" />
   </ItemGroup>
 </Project>
