@@ -51,23 +51,11 @@ HRESULT StartMenuState::OnRender(ID2D1HwndRenderTarget* renderTarget)
 
 void StartMenuState::OnUpdate()
 {
-	HandleInput();
 }
 
-void StartMenuState::HandleInput()
+void StartMenuState::OnInput(int keysChanged, int keysDown, int keysUp)
 {
-	// TODO: possible refactor: move meat and bones of input capture to GameState class?
-	int currentKeyboardState = 0;
-	if(GetAsyncKeyState( VK_DOWN)) currentKeyboardState |= UP_ARROW;
-	if(GetAsyncKeyState(VK_UP)) currentKeyboardState |= DOWN_ARROW;
-	if(GetAsyncKeyState(VK_RETURN)) currentKeyboardState |= ENTER;
-	if(GetAsyncKeyState(VK_SPACE)) currentKeyboardState |= SPACE;
-
-	int keysChanged = currentKeyboardState ^ previousKeyboardState;
-	int keysDown = currentKeyboardState & keysChanged;
-	int keysUp = ~currentKeyboardState & keysChanged;
-
-	if( keysDown & (UP_ARROW | DOWN_ARROW))
+	if( keysDown & ((int)KeyboardKeys::UP_ARROW | (int)KeyboardKeys::DOWN_ARROW))
 	{
 		if(currentMenuOption == START)
 			currentMenuOption = QUIT;
@@ -75,7 +63,7 @@ void StartMenuState::HandleInput()
 			currentMenuOption = START;
 	}
 
-	if( keysDown & ( ENTER | SPACE ) )
+	if( keysDown & ( (int)KeyboardKeys::ENTER |(int)KeyboardKeys:: SPACE ) )
 	{
 		if(currentMenuOption == START)
 		{
@@ -86,9 +74,6 @@ void StartMenuState::HandleInput()
 			PostQuitMessage(0);
 		}
 	}
-
-
-	previousKeyboardState = currentKeyboardState;
 }
 
 HRESULT StartMenuState::OnCreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)

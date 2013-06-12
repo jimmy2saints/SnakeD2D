@@ -12,5 +12,6 @@ private:
 	void OnUpdate();
 	void OnDiscardDeviceResources();
 	HRESULT OnCreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
+	void OnInput(int keysChanged, int keysDown, int keysUp);
 };
 

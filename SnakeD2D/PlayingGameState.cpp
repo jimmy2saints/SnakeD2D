@@ -31,3 +31,8 @@ HRESULT PlayingGameState::OnCreateDeviceResources(ID2D1HwndRenderTarget* target)
 {
 	return S_OK;
 }
+
+void PlayingGameState::OnInput(int keysChanged, int keysDown, int keysUp)
+{
+}
+

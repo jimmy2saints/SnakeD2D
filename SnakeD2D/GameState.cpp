@@ -8,6 +8,7 @@ GameState::GameState(HWND windowHandle, ID2D1Factory* factory, Game* gamePtr)
 	hWnd = windowHandle;
 	game = gamePtr;
 	renderTarget = nullptr;
+	previousKeyboardState = 0;
 }
 
 
@@ -19,9 +20,29 @@ GameState::~GameState(void)
 HRESULT GameState::Update()
 {
 	// TODO: Lock to execute OnUpdate() to specific time based update interval?
+	HandleInput();
 	OnUpdate();
 	HRESULT hr = Render();
 	return hr;
+}
+
+void GameState::HandleInput()
+{
+	int currentKeyboardState = 0;
+	if(GetAsyncKeyState( VK_DOWN)) currentKeyboardState |= (int)KeyboardKeys::UP_ARROW;
+	if(GetAsyncKeyState(VK_UP)) currentKeyboardState |= (int)KeyboardKeys::DOWN_ARROW;
+	if(GetAsyncKeyState(VK_LEFT)) currentKeyboardState |= (int)KeyboardKeys::LEFT_ARROW;
+	if(GetAsyncKeyState(VK_RIGHT)) currentKeyboardState |= (int)KeyboardKeys::RIGHT_ARROW;
+	if(GetAsyncKeyState(VK_RETURN)) currentKeyboardState |= (int)KeyboardKeys::ENTER;
+	if(GetAsyncKeyState(VK_SPACE)) currentKeyboardState |= (int)KeyboardKeys::SPACE;
+
+	int keysChanged = currentKeyboardState ^ previousKeyboardState;
+	int keysDown = currentKeyboardState & keysChanged;
+	int keysUp = ~currentKeyboardState & keysChanged;
+
+	OnInput(keysChanged, keysDown, keysUp);
+
+	previousKeyboardState = currentKeyboardState;
 }
 
 void GameState::ChangeGameState(GAME_STATE new_state)
