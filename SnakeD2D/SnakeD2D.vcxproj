@@ -72,6 +72,7 @@
     <ClInclude Include="safe_release.h" />
     <ClInclude Include="SnakeD2D.h" />
     <ClInclude Include="StartMenuState.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -79,6 +80,7 @@
     <ClCompile Include="PlayingGameState.cpp" />
     <ClCompile Include="SnakeD2D.cpp" />
     <ClCompile Include="StartMenuState.cpp" />
+    <ClCompile Include="utility.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

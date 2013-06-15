@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef GAME_UNIT_SIZE
-#define GAME_UNIT_SIZE 10
+#define GAME_UNIT_SIZE 20
 #endif
 
 #ifndef GAME_AREA_SIZE
