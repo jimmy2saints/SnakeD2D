@@ -29,7 +29,7 @@ HRESULT GameState::Update()
 void GameState::HandleInput()
 {
 	int currentKeyboardState = 0;
-	if(GetAsyncKeyState( VK_DOWN)) currentKeyboardState |= (int)KeyboardKeys::UP_ARROW;
+	if(GetAsyncKeyState(VK_DOWN)) currentKeyboardState |= (int)KeyboardKeys::UP_ARROW;
 	if(GetAsyncKeyState(VK_UP)) currentKeyboardState |= (int)KeyboardKeys::DOWN_ARROW;
 	if(GetAsyncKeyState(VK_LEFT)) currentKeyboardState |= (int)KeyboardKeys::LEFT_ARROW;
 	if(GetAsyncKeyState(VK_RIGHT)) currentKeyboardState |= (int)KeyboardKeys::RIGHT_ARROW;

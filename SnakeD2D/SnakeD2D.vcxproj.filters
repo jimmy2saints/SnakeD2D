@@ -78,4 +78,15 @@
   <ItemGroup>
     <Text Include="levels\level1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="levels\level2" />
+    <None Include="levels\level3" />
+    <None Include="levels\level4" />
+    <None Include="levels\level5" />
+    <None Include="levels\level6" />
+    <None Include="levels\level7" />
+    <None Include="levels\level8" />
+    <None Include="levels\level9" />
+    <None Include="levels\level10" />
+  </ItemGroup>
 </Project>

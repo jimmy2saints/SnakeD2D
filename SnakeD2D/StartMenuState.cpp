@@ -33,7 +33,7 @@ HRESULT StartMenuState::OnRender(ID2D1HwndRenderTarget* renderTarget)
 	}
 
 	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-	renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Wheat));
+	renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 
 	renderTarget->DrawTextA(startGametext, ARRAYSIZE(startGametext) - 1, textFormat,
 		D2D1::RectF(0, startGameTextStartY, renderTargetSize.width, startGameTextStopY), startBrush);
@@ -68,6 +68,7 @@ void StartMenuState::OnInput(int keysChanged, int keysDown, int keysUp)
 		if(currentMenuOption == START)
 		{
 			ChangeGameState(GAME_STATE::PLAYING);
+			Sleep(200);
 		}
 		else
 		{
@@ -80,10 +81,10 @@ HRESULT StartMenuState::OnCreateDeviceResources(ID2D1HwndRenderTarget* renderTar
 {
 	HRESULT hr;
 
-	hr = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Black, 1.0f), &idleTextBrush);
+	hr = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White, 1.0f), &idleTextBrush);
 
 	if(SUCCEEDED(hr))
-		hr = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White, 1.0f), &activeTextBrush);
+		hr = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Yellow, 1.0f), &activeTextBrush);
 
 	return hr;
 }

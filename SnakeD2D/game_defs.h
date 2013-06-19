@@ -5,7 +5,7 @@
 #endif
 
 #ifndef GAME_AREA_SIZE
-#define GAME_AREA_SIZE 700
+#define GAME_AREA_SIZE 500
 #endif
 
 #ifndef GAME_GRID_SIZE
