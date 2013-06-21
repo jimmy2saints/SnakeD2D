@@ -18,15 +18,17 @@ HRESULT Game::Initialize()
 	DBOUT("dpiX is " << dpiX << ", dpiY is " << dpiY << "\n" );
 	DBOUT("width is " << width << ", height is " << height << "\n" );
 
+	ChangeGameState(GAME_STATE::START_MENU);
+
 	SetWindowPos(hWnd, HWND_TOP, CW_USEDEFAULT, CW_USEDEFAULT, width, height, SWP_NOMOVE );
 	
-	ChangeGameState(GAME_STATE::START_MENU);
 	return hr; 
 }
 
 void Game::OnResize(UINT width, UINT height)
 {
-	state->OnResize(width, height);
+	if(state != nullptr)
+		state->OnResize(width, height);
 }
 
 HRESULT Game::Update()
