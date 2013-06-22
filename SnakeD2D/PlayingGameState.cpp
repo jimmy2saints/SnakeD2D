@@ -452,6 +452,7 @@ void PlayingGameState::StartLevel()
 	Position startSnake;
 	startSnake.x = 2;
 	startSnake.y = 2;
+	_dead = false;
 
 	bool placed_item = false;
 	while(!placed_item)
